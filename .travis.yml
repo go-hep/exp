@@ -1,5 +1,5 @@
 language: go
-go_import_path: go-hep.org/x/hep
+go_import_path: go-hep.org/x/exp
 os:
   - linux
 

@@ -59,7 +59,12 @@ func testFS_Mkdir(t *testing.T, addr string) {
 			t.Logf("could not remove %q: %v", mnt, err)
 		}
 	}()
-	defer server.Unmount()
+	defer func() {
+		err := server.Unmount()
+		if err != nil {
+			t.Logf("could not unmount: %+v", err)
+		}
+	}()
 	go server.Serve()
 
 	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
@@ -93,7 +98,12 @@ func testFS_OpenDir(t *testing.T, addr string) {
 			t.Logf("could not remove %q: %v", mnt, err)
 		}
 	}()
-	defer server.Unmount()
+	defer func() {
+		err := server.Unmount()
+		if err != nil {
+			t.Logf("could not unmount: %+v", err)
+		}
+	}()
 	go server.Serve()
 
 	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
@@ -220,7 +230,12 @@ func testFS_Mknod(t *testing.T, addr string) {
 			t.Logf("could not remove %q: %v", mnt, err)
 		}
 	}()
-	defer server.Unmount()
+	defer func() {
+		err := server.Unmount()
+		if err != nil {
+			t.Logf("could not unmount: %+v", err)
+		}
+	}()
 	go server.Serve()
 
 	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")
@@ -259,7 +274,12 @@ func testFS_Chmod(t *testing.T, addr string) {
 			t.Logf("could not remove %q: %v", mnt, err)
 		}
 	}()
-	defer server.Unmount()
+	defer func() {
+		err := server.Unmount()
+		if err != nil {
+			t.Logf("could not unmount: %+v", err)
+		}
+	}()
 	go server.Serve()
 
 	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")

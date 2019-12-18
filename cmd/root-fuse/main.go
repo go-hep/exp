@@ -113,19 +113,19 @@ func run(target, fname string, verbose bool, ready chan struct{}, c chan os.Sign
 
 	go server.Serve()
 
-	select {
-	case v := <-c:
-		if verbose {
-			log.Printf("unmounting %q...", target)
-		}
-		err := server.Unmount()
-		if err != nil {
-			log.Printf("could not unmount %q: %v", target, err)
-			return
-		}
-		if verbose {
-			log.Printf("unmounting %q... [done]", target)
-		}
-		c <- v
+	v := <-c
+	if verbose {
+		log.Printf("unmounting %q...", target)
 	}
+
+	err = server.Unmount()
+	if err != nil {
+		log.Printf("could not unmount %q: %v", target, err)
+		return
+	}
+
+	if verbose {
+		log.Printf("unmounting %q... [done]", target)
+	}
+	c <- v
 }

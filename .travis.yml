@@ -14,7 +14,6 @@ matrix:
    - go: 1.14.x
      env:
        - TAGS="-tags travis"
-       - COVERAGE="-cover"
    - go: 1.13.x
      env:
        - TAGS="-tags travis"
@@ -23,13 +22,6 @@ matrix:
        - TAGS="-tags travis"
 
 sudo: required
-
-notifications:
-  email:
-    recipients:
-      - go.hep.dev@gmail.com
-    on_success: always
-    on_failure: always
 
 before_script:
  - sudo apt-get install -qq pkg-config fuse
@@ -42,6 +34,3 @@ script:
  - GOARCH=386   go install -v $TAGS ./...
  - GOARCH=amd64 go install -v $TAGS ./...
  - go run ./ci/run-tests.go -race $TAGS $COVERAGE
-
-after_success:
- - bash <(curl -s https://codecov.io/bash)

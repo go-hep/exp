@@ -24,7 +24,7 @@ matrix:
 sudo: required
 
 before_script:
- - sudo apt-get install -qq pkg-config fuse
+ - sudo apt-get install -qq pkg-config fuse libgles2-mesa-dev libxkbcommon-dev libxkbcommon-x11-dev
  - sudo modprobe fuse
  - sudo chmod 666 /dev/fuse
  - sudo chown root:$USER /etc/fuse.conf

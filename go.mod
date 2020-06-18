@@ -3,6 +3,7 @@ module go-hep.org/x/exp
 go 1.13
 
 require (
+	gioui.org v0.0.0-20200617100808-dd225d5d07f0
 	github.com/hanwen/go-fuse v1.0.0
 	go-hep.org/x/hep v0.23.1
 	golang.org/x/exp v0.0.0-20200228211341-fcea875c7e85

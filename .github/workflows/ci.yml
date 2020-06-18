@@ -43,7 +43,7 @@ jobs:
     - name: Install Linux packages
       if: matrix.platform == 'ubuntu-latest'
       run: |
-        sudo apt-get install -qq pkg-config fuse
+        sudo apt-get install -qq pkg-config fuse libgles2-mesa-dev libxkbcommon-dev libxkbcommon-x11-dev
 
     - name: Build-Linux-32b
       if: matrix.platform == 'ubuntu-latest'

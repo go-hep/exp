@@ -51,15 +51,6 @@ type fakeBuffer struct {
 	img *image.RGBA
 }
 
-func newBuffer(size image.Point) *fakeBuffer {
-	fb := fakeBuffer{
-		img: image.NewRGBA(image.Rectangle{
-			Max: size,
-		}),
-	}
-	return &fb
-}
-
 // Release releases the Buffer's resources, after all pending uploads and
 // draws resolve.
 //

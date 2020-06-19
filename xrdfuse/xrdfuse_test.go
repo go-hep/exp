@@ -69,12 +69,12 @@ func testFS_Mkdir(t *testing.T, addr string) {
 
 	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
 	if err != nil {
-		t.Fatalf("could not create dir: %v", err)
+		t.Fatalf("could not create dir: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(tmp)
 		if err != nil {
-			t.Logf("could not remove %q: %v", tmp, err)
+			t.Logf("could not remove %q: %+v", tmp, err)
 		}
 	}()
 }
@@ -90,12 +90,12 @@ func TestFS_Mkdir(t *testing.T) {
 func testFS_OpenDir(t *testing.T, addr string) {
 	mnt, server, err := mount(t, addr)
 	if err != nil {
-		t.Fatalf("could not mount: %v", err)
+		t.Fatalf("could not mount: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(mnt)
 		if err != nil {
-			t.Logf("could not remove %q: %v", mnt, err)
+			t.Logf("could not remove %q: %+v", mnt, err)
 		}
 	}()
 	defer func() {
@@ -108,18 +108,18 @@ func testFS_OpenDir(t *testing.T, addr string) {
 
 	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
 	if err != nil {
-		t.Fatalf("could not create dir: %v", err)
+		t.Fatalf("could not create dir: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(tmp)
 		if err != nil {
-			t.Logf("could not remove %q: %v", tmp, err)
+			t.Logf("could not remove %q: %+v", tmp, err)
 		}
 	}()
 
 	f, err := os.Open(mnt)
 	if err != nil {
-		t.Fatalf("could not open dir: %v", err)
+		t.Fatalf("could not open dir: %+v", err)
 	}
 	defer f.Close()
 
@@ -127,7 +127,7 @@ func testFS_OpenDir(t *testing.T, addr string) {
 
 	dirs, err := f.Readdirnames(0)
 	if err != nil {
-		t.Fatalf("could not readdir: %v", err)
+		t.Fatalf("could not readdir: %+v", err)
 	}
 	for _, d := range dirs {
 		if d == tmpName {
@@ -148,25 +148,30 @@ func TestFS_OpenDir(t *testing.T) {
 func testFS_Rename(t *testing.T, addr string) {
 	mnt, server, err := mount(t, addr)
 	if err != nil {
-		t.Fatalf("could not mount: %v", err)
+		t.Fatalf("could not mount: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(mnt)
 		if err != nil {
-			t.Logf("could not remove %q: %v", mnt, err)
+			t.Logf("could not remove %q: %+v", mnt, err)
 		}
 	}()
-	defer server.Unmount()
+	defer func() {
+		err := server.Unmount()
+		if err != nil {
+			t.Logf("could not unmount: %+v", err)
+		}
+	}()
 	go server.Serve()
 
 	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
 	if err != nil {
-		t.Fatalf("could not create dir: %v", err)
+		t.Fatalf("could not create dir: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(tmp)
 		if err != nil {
-			t.Logf("could not remove %q: %v", tmp, err)
+			t.Logf("could not remove %q: %+v", tmp, err)
 		}
 	}()
 
@@ -176,24 +181,24 @@ func testFS_Rename(t *testing.T, addr string) {
 
 	err = os.Rename(tmp, newTmp)
 	if err != nil {
-		t.Fatalf("could not rename dir: %v", err)
+		t.Fatalf("could not rename dir: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(newTmp)
 		if err != nil {
-			t.Logf("could not remove %q: %v", newTmp, err)
+			t.Logf("could not remove %q: %+v", newTmp, err)
 		}
 	}()
 
 	f, err := os.Open(mnt)
 	if err != nil {
-		t.Fatalf("could not open dir: %v", err)
+		t.Fatalf("could not open dir: %+v", err)
 	}
 	defer f.Close()
 
 	dirs, err := f.Readdirnames(0)
 	if err != nil {
-		t.Fatalf("could not readdir: %v", err)
+		t.Fatalf("could not readdir: %+v", err)
 	}
 
 	ok := false
@@ -222,12 +227,12 @@ func TestFS_Rename(t *testing.T) {
 func testFS_Mknod(t *testing.T, addr string) {
 	mnt, server, err := mount(t, addr)
 	if err != nil {
-		t.Fatalf("could not mount: %v", err)
+		t.Fatalf("could not mount: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(mnt)
 		if err != nil {
-			t.Logf("could not remove %q: %v", mnt, err)
+			t.Logf("could not remove %q: %+v", mnt, err)
 		}
 	}()
 	defer func() {
@@ -240,18 +245,18 @@ func testFS_Mknod(t *testing.T, addr string) {
 
 	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")
 	if err != nil {
-		t.Fatalf("could not create file: %v", err)
+		t.Fatalf("could not create file: %+v", err)
 	}
 	defer os.Remove(tmp.Name())
 
 	err = tmp.Close()
 	if err != nil {
-		t.Fatalf("could not close %q: %v", tmp.Name(), err)
+		t.Fatalf("could not close %q: %+v", tmp.Name(), err)
 	}
 
 	err = os.Remove(tmp.Name())
 	if err != nil {
-		t.Fatalf("could not remove %q: %v", tmp.Name(), err)
+		t.Fatalf("could not remove %q: %+v", tmp.Name(), err)
 	}
 }
 
@@ -266,12 +271,12 @@ func TestFS_Mknod(t *testing.T) {
 func testFS_Chmod(t *testing.T, addr string) {
 	mnt, server, err := mount(t, addr)
 	if err != nil {
-		t.Fatalf("could not mount: %v", err)
+		t.Fatalf("could not mount: %+v", err)
 	}
 	defer func() {
 		err := os.RemoveAll(mnt)
 		if err != nil {
-			t.Logf("could not remove %q: %v", mnt, err)
+			t.Logf("could not remove %q: %+v", mnt, err)
 		}
 	}()
 	defer func() {
@@ -284,24 +289,24 @@ func testFS_Chmod(t *testing.T, addr string) {
 
 	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")
 	if err != nil {
-		t.Fatalf("could not create file: %v", err)
+		t.Fatalf("could not create file: %+v", err)
 	}
 	defer os.Remove(tmp.Name())
 
 	err = tmp.Close()
 	if err != nil {
-		t.Fatalf("could not close %q: %v", tmp.Name(), err)
+		t.Fatalf("could not close %q: %+v", tmp.Name(), err)
 	}
 
 	want := os.FileMode(0222)
 	err = os.Chmod(tmp.Name(), want)
 	if err != nil {
-		t.Fatalf("could not chmod %q: %v", tmp.Name(), err)
+		t.Fatalf("could not chmod %q: %+v", tmp.Name(), err)
 	}
 
 	stat, err := os.Stat(tmp.Name())
 	if err != nil {
-		t.Fatalf("could not stat %q: %v", tmp.Name(), err)
+		t.Fatalf("could not stat %q: %+v", tmp.Name(), err)
 	}
 
 	if stat.Mode() != want {

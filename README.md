@@ -1,7 +1,8 @@
 exp
 ===
 
-[![Build Status](https://travis-ci.org/go-hep/exp.svg?branch=master)](https://travis-ci.org/go-hep/exp)
+[![go.dev reference](https://pkg.go.dev/badge/go-hep.org/x/exp)](https://pkg.go.dev/go-hep.org/x/exp)
+[![CI](https://github.com/go-hep/exp/workflows/CI/badge.svg)](https://github.com/go-hep/exp/actions)
 [![codecov](https://codecov.io/gh/go-hep/exp/branch/master/graph/badge.svg)](https://codecov.io/gh/go-hep/exp)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-hep/exp)](https://goreportcard.com/report/github.com/go-hep/exp)
 [![GoDoc](https://godoc.org/go-hep.org/x/exp?status.svg)](https://godoc.org/go-hep.org/x/exp)

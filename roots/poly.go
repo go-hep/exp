@@ -8,6 +8,8 @@ import (
 	"math"
 	"math/cmplx"
 	"sort"
+
+	"gonum.org/v1/gonum/mat"
 )
 
 // Polynomial returns the roots of an n-th degree polynomial of the form:
@@ -58,11 +60,31 @@ func Polynomial(dst []complex128, ps []float64) []complex128 {
 		return dst
 
 	default:
-		panic("not implemented")
-	}
+		// use companion matrix for n>4
 
-	sortCmplx(dst)
-	return dst
+		// FIXME: balance Hessenberg matrix (the companion matrix) as
+		// laid out in Numerical Recipes (3rd Ed.), 11.6,11.7,11.8
+		// This is what GSL is doing according to:
+		//   https://www.gnu.org/software/gsl/doc/html/poly.html
+		norm := 1 / ps[0]
+		comp := mat.NewDense(n, n, nil)
+		row := comp.RawRowView(0)
+		copy(row, ps[1:])
+		for i := range row {
+			row[i] *= -norm
+		}
+		for i := 1; i < n; i++ {
+			row := comp.RawRowView(i)
+			row[i-1] = 1
+		}
+		var eigen mat.Eigen
+		if eigen.Factorize(comp, mat.EigenNone) {
+			eigen.Values(dst)
+		}
+
+		sortCmplx(dst)
+		return dst
+	}
 }
 
 func sortCmplx(xs []complex128) {

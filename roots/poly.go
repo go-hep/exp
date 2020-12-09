@@ -5,6 +5,7 @@
 package roots
 
 import (
+	"fmt"
 	"math"
 	"math/cmplx"
 	"sort"
@@ -195,7 +196,9 @@ func Poly3(p0, p1, p2, p3 float64) (z0, z1, z2 complex128) {
 		sortCmplx(zs[:])
 		return zs[0], zs[1], zs[2]
 	}
-	panic("impossible")
+	panic(fmt.Errorf("impossible delta=%g, p0=%g p1=%g p2=%g p3=%g",
+		Δ, p0, p1, p2, p3,
+	))
 }
 
 // Poly4 returns the roots of the following 4th degree polynomial:

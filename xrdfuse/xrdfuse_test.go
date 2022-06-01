@@ -8,7 +8,6 @@ package xrdfuse // import "go-hep.org/x/exp/xrdfuse"
 
 import (
 	"context"
-	"io/ioutil"
 	"os"
 	"path"
 	"testing"
@@ -22,7 +21,7 @@ import (
 var testClientAddrs []string
 
 func mount(t *testing.T, addr string) (mountPoint string, server *fuse.Server, err error) {
-	tmp, err := ioutil.TempDir("", "xrdfuse-")
+	tmp, err := os.MkdirTemp("", "xrdfuse-")
 	if err != nil {
 		return "", nil, err
 	}
@@ -67,7 +66,7 @@ func testFS_Mkdir(t *testing.T, addr string) {
 	}()
 	go server.Serve()
 
-	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
+	tmp, err := os.MkdirTemp(mnt, "xrdfuse-")
 	if err != nil {
 		t.Fatalf("could not create dir: %+v", err)
 	}
@@ -106,7 +105,7 @@ func testFS_OpenDir(t *testing.T, addr string) {
 	}()
 	go server.Serve()
 
-	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
+	tmp, err := os.MkdirTemp(mnt, "xrdfuse-")
 	if err != nil {
 		t.Fatalf("could not create dir: %+v", err)
 	}
@@ -164,7 +163,7 @@ func testFS_Rename(t *testing.T, addr string) {
 	}()
 	go server.Serve()
 
-	tmp, err := ioutil.TempDir(mnt, "xrdfuse-")
+	tmp, err := os.MkdirTemp(mnt, "xrdfuse-")
 	if err != nil {
 		t.Fatalf("could not create dir: %+v", err)
 	}
@@ -243,7 +242,7 @@ func testFS_Mknod(t *testing.T, addr string) {
 	}()
 	go server.Serve()
 
-	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")
+	tmp, err := os.CreateTemp(mnt, "xrdfuse-")
 	if err != nil {
 		t.Fatalf("could not create file: %+v", err)
 	}
@@ -287,7 +286,7 @@ func testFS_Chmod(t *testing.T, addr string) {
 	}()
 	go server.Serve()
 
-	tmp, err := ioutil.TempFile(mnt, "xrdfuse-")
+	tmp, err := os.CreateTemp(mnt, "xrdfuse-")
 	if err != nil {
 		t.Fatalf("could not create file: %+v", err)
 	}

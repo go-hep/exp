@@ -8,14 +8,13 @@ package main
 
 import (
 	"bytes"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 )
 
 func TestFUSESimple(t *testing.T) {
-	tmp, err := ioutil.TempDir("", "root-fuse-")
+	tmp, err := os.MkdirTemp("", "root-fuse-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,7 +55,7 @@ func TestFUSESimple(t *testing.T) {
 		t.Fatalf("invalid entry name. got %q. want %q", got, want)
 	}
 
-	got, err := ioutil.ReadFile(filepath.Join(tmp, "tree"))
+	got, err := os.ReadFile(filepath.Join(tmp, "tree"))
 	if err != nil {
 		t.Fatalf("could not read /tmp/tree: %v", err)
 	}
@@ -79,7 +78,7 @@ type:  TTree
 }
 
 func TestFUSEDirs(t *testing.T) {
-	tmp, err := ioutil.TempDir("", "root-fuse-")
+	tmp, err := os.MkdirTemp("", "root-fuse-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -122,7 +121,7 @@ func TestFUSEDirs(t *testing.T) {
 		}
 	}
 
-	got, err := ioutil.ReadFile(filepath.Join(tmp, "dir1", "dir11", "h1"))
+	got, err := os.ReadFile(filepath.Join(tmp, "dir1", "dir11", "h1"))
 	if err != nil {
 		t.Fatalf("could not read /tmp/dir1/dir11/h1: %v", err)
 	}

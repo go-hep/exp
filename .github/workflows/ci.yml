@@ -57,6 +57,12 @@ jobs:
       if: matrix.platform == 'ubuntu-latest'
       run: |
         go run ./ci/run-tests.go $TAGS $COVERAGE
+    - name: static-check
+      uses: dominikh/staticcheck-action@v1.2.0
+      with:
+        install-go: false
+        cache-key: ${{ matrix.platform }}
+        version: "2022.1"
     - name: Upload-Coverage
       if: matrix.platform == 'ubuntu-latest'
       uses: codecov/codecov-action@v1

@@ -9,15 +9,16 @@
 //
 // Usage:
 //
-//  $> xrd-fuse [OPTIONS] <remote-dir> <local-dir>
+//	$> xrd-fuse [OPTIONS] <remote-dir> <local-dir>
 //
 // Example:
 //
-//  $> xrd-fuse root://server.example.com/some/dir /mnt
-//  $> xrd-fuse -v root://server.example.com/some/dir /mnt
+//	$> xrd-fuse root://server.example.com/some/dir /mnt
+//	$> xrd-fuse -v root://server.example.com/some/dir /mnt
 //
 // Options:
-//   -v	enable verbose mode
+//
+//	-v	enable verbose mode
 package main
 
 import (

@@ -14,7 +14,8 @@ import (
 )
 
 // Polynomial returns the roots of an n-th degree polynomial of the form:
-//  p[0] * x**n + p[1] * x**(n-1) + ... + p[n-1]*x + p[n]
+//
+//	p[0] * x**n + p[1] * x**(n-1) + ... + p[n-1]*x + p[n]
 func Polynomial(dst []complex128, ps []float64) []complex128 {
 	n := len(ps) - 1
 	if dst == nil {
@@ -106,7 +107,8 @@ func min128(zi, zj complex128) bool {
 }
 
 // Poly2 returns the roots of the following 2nd degree polynomial:
-//  p0 x^2 + p1 x + p2 = 0
+//
+//	p0 x^2 + p1 x + p2 = 0
 func Poly2(p0, p1, p2 float64) (z0, z1 complex128) {
 	// reduce to: x^2 + a.x + b = 0
 	norm := 1 / p0
@@ -124,7 +126,8 @@ func Poly2(p0, p1, p2 float64) (z0, z1 complex128) {
 }
 
 // Poly3 returns the roots of the following 3rd degree polynomial:
-//  p0 x^3 + p1 x^2 + p2 x + p3 = 0
+//
+//	p0 x^3 + p1 x^2 + p2 x + p3 = 0
 func Poly3(p0, p1, p2, p3 float64) (z0, z1, z2 complex128) {
 	// use Cardano/Tartaglia/Vieta formulae.
 	// see:
@@ -202,7 +205,8 @@ func Poly3(p0, p1, p2, p3 float64) (z0, z1, z2 complex128) {
 }
 
 // Poly4 returns the roots of the following 4th degree polynomial:
-//  p0 x^4 + p1 x^3 + p2 x^2 + p3 x + p4 = 0
+//
+//	p0 x^4 + p1 x^3 + p2 x^2 + p3 x + p4 = 0
 func Poly4(p0, p1, p2, p3, p4 float64) (z0, z1, z2, z3 complex128) {
 	// https://en.wikipedia.org/wiki/Quartic_function
 	// https://doi.org/10.1016/j.cam.2010.04.015

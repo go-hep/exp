@@ -9,17 +9,17 @@
 //
 // Usage:
 //
-//   $> root-fuse [OPTIONS] <ROOT file> <mount-dir>
+//	$> root-fuse [OPTIONS] <ROOT file> <mount-dir>
 //
 // Example:
 //
-//   $> root-fuse ./testdata/simple.root /mnt/dir
-//   $> root-fuse -v ./testdata/simple.root /mnt/dir
-//   $> root-fuse root://eospublic.cern.ch:1094//eos/opendata/atlas/OutreachDatasets/2016-07-29/MC/mc_173045.DYtautauM08to15.root /mnt/dir
+//	$> root-fuse ./testdata/simple.root /mnt/dir
+//	$> root-fuse -v ./testdata/simple.root /mnt/dir
+//	$> root-fuse root://eospublic.cern.ch:1094//eos/opendata/atlas/OutreachDatasets/2016-07-29/MC/mc_173045.DYtautauM08to15.root /mnt/dir
 //
 // Options:
-//   -v	enable verbose mode
 //
+//	-v	enable verbose mode
 package main // import "go-hep.org/x/exp/cmd/root-fuse"
 
 import (

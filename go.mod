@@ -1,6 +1,6 @@
 module go-hep.org/x/exp
 
-go 1.19
+go 1.20
 
 require (
 	github.com/hanwen/go-fuse v1.0.0

@@ -1,10 +1,10 @@
 module go-hep.org/x/exp
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/hanwen/go-fuse v1.0.0
-	go-hep.org/x/hep v0.37.0
+	go-hep.org/x/hep v0.37.1
 	gonum.org/v1/gonum v0.16.0
 )
 
@@ -20,13 +20,13 @@ require (
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.22 // indirect
 	github.com/pierrec/xxHash v0.1.5 // indirect
-	github.com/ulikunitz/xz v0.5.12 // indirect
-	golang.org/x/crypto v0.38.0 // indirect
-	golang.org/x/mod v0.24.0 // indirect
-	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
-	golang.org/x/tools v0.33.0 // indirect
+	github.com/ulikunitz/xz v0.5.15 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/mod v0.28.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/text v0.29.0 // indirect
+	golang.org/x/tools v0.37.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
